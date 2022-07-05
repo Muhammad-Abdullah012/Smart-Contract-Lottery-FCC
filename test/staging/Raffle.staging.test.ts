@@ -20,7 +20,7 @@ import { Raffle } from "../../typechain";
         it("Should work with chainlink Keepers and Chainlink VRF, we get a random winner", async function () {
             const startingTimeStamp = await raffle.getLatestTimeStamp();
 
-            await new Promise(async (resolve, reject) => {
+            await new Promise<void>(async (resolve, reject) => {
                 raffle.once("WinnerPicked", async () => {
                     console.log("WinnerPicked event fired!");
                     try {
@@ -39,7 +39,7 @@ import { Raffle } from "../../typechain";
                             startingTimeStamp.toNumber()
                         );
 
-                        resolve(0);
+                        resolve();
                     } catch (error) {
                         console.error(error);
                         reject(error);
