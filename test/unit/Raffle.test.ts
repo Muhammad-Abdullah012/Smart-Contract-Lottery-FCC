@@ -215,7 +215,7 @@ import { Raffle, VRFCoordinatorV2Mock } from "../../typechain";
 
             const startingTimeStamp = await raffle.getLatestTimeStamp();
 
-            await new Promise(async (resolve, reject) => {
+            await new Promise<void>(async (resolve, reject) => {
                 raffle.once("WinnerPicked", async () => {
                     try {
                         const numberOfPlayers = await raffle.getNumberOfPlayers();
@@ -231,7 +231,7 @@ import { Raffle, VRFCoordinatorV2Mock } from "../../typechain";
                     } catch (err) {
                         reject(err);
                     }
-                    resolve(0);
+                    resolve();
                 });
 
                 const tx = await raffle.performUpkeep([]);  //This should revert??
